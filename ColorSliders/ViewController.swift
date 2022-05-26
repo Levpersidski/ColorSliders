@@ -21,24 +21,35 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        mainView.layer.cornerRadius = 10
+        mainView.layer.cornerRadius = 15
         
         redSliderValue.text = String(redColorSlider.value)
         greenSliderValue.text = String(greenColorSlider.value)
         blueSliderValue.text = String(blueColorSlider.value)
+        
+        
     }
 
     @IBAction func redSliderAction() {
         
         redSliderValue.text = String(format: "%.1f", redColorSlider.value)
+        changeColor()
+        
     }
     
     @IBAction func GreenSliderAction() {
         greenSliderValue.text = String(format: "%.1f",greenColorSlider.value)
+        changeColor()
     }
     
     @IBAction func blueSliderAction() {
         blueSliderValue.text = String(format: "%.1f",blueColorSlider.value)
+        changeColor()
     }
-}
+    func changeColor () {
+        mainView.backgroundColor = UIColor(red: CGFloat(redColorSlider.value), green: CGFloat(greenColorSlider.value), blue: CGFloat(blueColorSlider.value), alpha: 1)
+        
+
+    }
+    }
 
