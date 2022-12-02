@@ -31,7 +31,7 @@ class ColorViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         mainView.layer.cornerRadius = 15
-     
+        
         
         redColorSlider.value = Float(mainColorView.rgba.red)
         greenColorSlider.value = Float(mainColorView.rgba.green)
@@ -44,6 +44,7 @@ class ColorViewController: UIViewController {
                                            green: CGFloat(greenColorSlider.value),
                                            blue: CGFloat(blueColorSlider.value),
                                            alpha: 1)
+        
         
     }
 
@@ -73,7 +74,7 @@ class ColorViewController: UIViewController {
     }
     
     @IBAction func doneButtonPressed() {
-        delegate.setNewColors(redColorSlider.value, greenColorSlider.value, blueColorSlider.value)
+        delegate.setNewColors. (CGFloat(redColorSlider.value), green: CGFloat(greenColorSlider.value), blue: CGFloat(blueColorSlider.value), alpha: 1)
     dismiss(animated: true)
     }
 }

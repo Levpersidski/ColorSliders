@@ -9,7 +9,7 @@ import UIKit
 
 
 protocol ColorViewControllerDelegate {
-    func setNewColors ( _ red: Float, _ green: Float, _ blue: Float)
+    func setNewColors ( _ red: Float, _ green: Float, _ blue: Float_ alpha: CGFloat)
 }
 
 class MainViewController: UIViewController {
@@ -20,8 +20,6 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -41,9 +39,11 @@ class MainViewController: UIViewController {
 
 }
 extension MainViewController: ColorViewControllerDelegate {
-    func setNewColors(_ red: Float, _ green: Float, _ blue: Float) {
-        colorView.backgroundColor = UIColor (redColorSlider.value, green: <#T##CGFloat#>, blue: <#T##CGFloat#>, alpha: <#T##CGFloat#>)
+    func setNewColors(_ red: CGFloat, _ green: CGFloat, _ blue: CGFloat, _ alpha: CGFloat) {
+        colorView.backgroundColor?.getRed(red, green: green, blue: blue, alpha: 1)
+    }
+    
     }
     
     
-}
+
