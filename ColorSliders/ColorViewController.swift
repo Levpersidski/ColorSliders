@@ -31,7 +31,10 @@ class ColorViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         mainView.layer.cornerRadius = 15
-        
+
+        redTFValue.delegate = self
+        greenTFValue.delegate = self
+        blueTFValue.delegate = self
         
         redColorSlider.value = Float(mainColorView.rgba.red)
         greenColorSlider.value = Float(mainColorView.rgba.green)
@@ -52,7 +55,9 @@ class ColorViewController: UIViewController {
         
         redSliderValue.text = String(format: "%.1f", redColorSlider.value)
         redTFValue.text = String(format: "%.1f", redColorSlider.value)
+    
         changeColor()
+        
         
     }
     
@@ -68,14 +73,14 @@ class ColorViewController: UIViewController {
         changeColor()
     }
    private func changeColor () {
-        mainView.backgroundColor = UIColor(red: CGFloat(redColorSlider.value), green: CGFloat(greenColorSlider.value), blue: CGFloat(blueColorSlider.value), alpha: 1)
+       mainView.backgroundColor = UIColor(red: CGFloat(redColorSlider.value), green: CGFloat(greenColorSlider.value), blue: CGFloat(blueColorSlider.value), alpha: 1)
         
 
     }
     
     @IBAction func doneButtonPressed() {
-        delegate.setNewColors( CGFloat(redColorSlider.value), CGFloat(greenColorSlider.value), CGFloat(blueColorSlider.value), 1)
-    dismiss(animated: true)
+        delegate.setNewColors(mainView.backgroundColor ?? .white)
+        dismiss(animated: true)
     }
 }
 
@@ -89,4 +94,34 @@ extension UIColor {
 
         return (red, green, blue, alpha)
     }
+}
+
+extension ColorViewController: UITextFieldDelegate {
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        guard let newValue = textField.text  else {return}
+        guard let numberValue = Int(newValue)  else {return}
+        if textField == redTFValue{
+            redSliderValue.value(forKey: redTFValue.text!)
+        } else {
+            
+        }
+        
+    }
+}
+extension ColorViewController {
+override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super .touchesBegan(touches, with: event)
+    
+    view.endEditing(true)
+    
+    
+
+}
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+            view.endEditing(true)
+        return true
+     }
+        
 }

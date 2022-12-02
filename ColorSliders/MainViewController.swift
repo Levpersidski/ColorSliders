@@ -9,10 +9,10 @@ import UIKit
 
 
 protocol ColorViewControllerDelegate {
-    func setNewColors ( _ red: CGFloat, _ green: CGFloat, _ blue: CGFloat, _ alpha: CGFloat)
+    func setNewColors ( _ color: UIColor)
 }
 
-class MainViewController: UIViewController {
+class MainViewController: UIViewController{
 
     @IBOutlet var colorView: UIView!
 
@@ -20,13 +20,15 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        colorView.backgroundColor
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let colorVC = segue.destination as? ColorViewController else {return}
-        colorVC.mainColorView = colorView.backgroundColor!
-        colorVC.delegate.self
+       guard let colorVC = segue.destination as? ColorViewController else {return}
+        colorVC.mainColorView = view.backgroundColor!
+        colorVC.delegate = self
+        
+        
     }
     /*
     // MARK: - Navigation
@@ -40,9 +42,8 @@ class MainViewController: UIViewController {
 
 }
 extension MainViewController: ColorViewControllerDelegate {
-    func setNewColors(_ red: CGFloat, _ green: CGFloat, _ blue: CGFloat, _ alpha: CGFloat) {
-        let alpha:CGFloat =  1
-        colorView.backgroundColor?.getRed(red, green: green, blue: blue, alpha: alpha)
+    func setNewColors(_ color : UIColor)  {
+        view.backgroundColor = color
     }
     
     }
