@@ -74,7 +74,7 @@ class ColorViewController: UIViewController {
     }
     
     @IBAction func doneButtonPressed() {
-        delegate.setNewColors. (CGFloat(redColorSlider.value), green: CGFloat(greenColorSlider.value), blue: CGFloat(blueColorSlider.value), alpha: 1)
+        delegate.setNewColors( CGFloat(redColorSlider.value), CGFloat(greenColorSlider.value), CGFloat(blueColorSlider.value), 1)
     dismiss(animated: true)
     }
 }
