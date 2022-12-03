@@ -72,6 +72,7 @@ class ColorViewController: UIViewController {
         blueTFValue.text = String ( format: "%.1f", blueColorSlider.value)
         changeColor()
     }
+    
    private func changeColor () {
        mainView.backgroundColor = UIColor(red: CGFloat(redColorSlider.value), green: CGFloat(greenColorSlider.value), blue: CGFloat(blueColorSlider.value), alpha: 1)
         
@@ -116,10 +117,7 @@ extension ColorViewController: UITextFieldDelegate {
         }
         alert.addAction(okAction)
         present(alert, animated: true)
-
         }
-        
-        
         
     }
 
@@ -128,9 +126,6 @@ override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super .touchesBegan(touches, with: event)
     
     view.endEditing(true)
-    
-    
-
 }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
