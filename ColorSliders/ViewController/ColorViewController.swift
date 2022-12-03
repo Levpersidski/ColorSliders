@@ -103,12 +103,13 @@ extension ColorViewController: UITextFieldDelegate {
         guard let numberValue = Double(newValue)  else {showAlert(title: "please enter number from 0.0 to 1.0", message: "Try again")
             textField.text = "0.0"
             
-            ;return
+            
             if textField == redTFValue {
                 redColorSlider.value = Float(redTFValue.text ?? "0.0") ?? Float(0.0)
                 view.endEditing(true)
+                
             }
-        }
+            ;return } 
     }
     private func showAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
