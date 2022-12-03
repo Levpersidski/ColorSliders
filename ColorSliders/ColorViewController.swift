@@ -99,15 +99,30 @@ extension UIColor {
 extension ColorViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         guard let newValue = textField.text  else {return}
-        guard let numberValue = Int(newValue)  else {return}
-        if textField == redTFValue{
-            redSliderValue.value(forKey: redTFValue.text!)
-        } else {
+        guard let numberValue = Double(newValue)  else {showAlert(title: "please enter number from 0.0 to 1.0", message: "Try again")
+            textField.text = "0.0"
             
+            ;return
+            if textField == redTFValue {
+                redColorSlider.value = Float(redTFValue.text ?? "0.0") ?? Float(0.0)
+                view.endEditing(true)
+            }
+        }
+    }
+    private func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "TRY AGAIN", style: .default) { _ in
+
+        }
+        alert.addAction(okAction)
+        present(alert, animated: true)
+
         }
         
+        
+        
     }
-}
+
 extension ColorViewController {
 override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super .touchesBegan(touches, with: event)
@@ -119,9 +134,11 @@ override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
             view.endEditing(true)
+        
         return true
      }
         
 }
+
+
