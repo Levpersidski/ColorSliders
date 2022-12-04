@@ -127,14 +127,15 @@ extension ColorViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         if textField == redTFValue { greenTFValue.becomeFirstResponder()
-         } else {
+        } else if textField == greenTFValue {
              blueTFValue.becomeFirstResponder()
-    
+    } else {
+             textField.endEditing(true)
          }
         return true
      }
-        
-    }
+}
+    
 
 extension ColorViewController {
 override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
