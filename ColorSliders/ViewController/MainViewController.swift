@@ -14,36 +14,19 @@ protocol ColorViewControllerDelegate {
 
 class MainViewController: UIViewController{
 
-    @IBOutlet var colorView: UIView!
-
-    
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
        guard let colorVC = segue.destination as? ColorViewController else {return}
         colorVC.mainColorView = view.backgroundColor!
         colorVC.delegate = self
         
-        
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
+
 extension MainViewController: ColorViewControllerDelegate {
     func setNewColors(_ color : UIColor)  {
         view.backgroundColor = color
+
     }
     
     }

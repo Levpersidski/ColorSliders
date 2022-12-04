@@ -41,13 +41,9 @@ class ColorViewController: UIViewController {
         blueColorSlider.value = Float(mainColorView.rgba.blue)
         
         redSliderAction()
-        GreenSliderAction()
+        greenSliderAction()
         blueSliderAction()
-        mainView.backgroundColor = UIColor(red: CGFloat(redColorSlider.value),
-                                           green: CGFloat(greenColorSlider.value),
-                                           blue: CGFloat(blueColorSlider.value),
-                                           alpha: 1)
-        
+        changeColor()
         
     }
 
@@ -61,7 +57,7 @@ class ColorViewController: UIViewController {
         
     }
     
-    @IBAction func GreenSliderAction() {
+    @IBAction func greenSliderAction() {
         greenSliderValue.text = String(format: "%.1f",greenColorSlider.value)
         greenTFValue.text = String(format: "%.1f", greenColorSlider.value)
         changeColor()
@@ -103,13 +99,21 @@ extension ColorViewController: UITextFieldDelegate {
         guard let numberValue = Double(newValue)  else {showAlert(title: "please enter number from 0.0 to 1.0", message: "Try again")
             textField.text = "0.0"
             
+            ;return }
+        
+        if textField == redTFValue {
+            redColorSlider.value = Float(redTFValue.text ?? "0.0") ?? Float(0.0)
+            redSliderAction()
             
-            if textField == redTFValue {
-                redColorSlider.value = Float(redTFValue.text ?? "0.0") ?? Float(0.0)
-                view.endEditing(true)
-                
-            }
-            ;return } 
+        } else if textField == greenTFValue {
+            greenColorSlider.value = Float(greenTFValue.text ?? "0.0" ) ?? Float(0.0)
+            greenSliderAction()
+            
+        } else if textField == blueTFValue {
+            blueColorSlider.value = Float ( blueTFValue.text ?? "0.0") ?? Float (0.0)
+            blueSliderAction()
+        }
+        
     }
     private func showAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -119,6 +123,16 @@ extension ColorViewController: UITextFieldDelegate {
         alert.addAction(okAction)
         present(alert, animated: true)
         }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        if textField == redTFValue { greenTFValue.becomeFirstResponder()
+         } else {
+             blueTFValue.becomeFirstResponder()
+    
+         }
+        return true
+     }
         
     }
 
@@ -129,11 +143,7 @@ override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     view.endEditing(true)
 }
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-            view.endEditing(true)
-        
-        return true
-     }
+   
         
 }
 
